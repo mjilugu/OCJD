@@ -1,0 +1,2 @@
+jdk version 1.7.0
+64-bit Windows 7 Enterprise Edition

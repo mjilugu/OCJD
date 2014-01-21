@@ -1,0 +1,91 @@
+
+This guide will help you to install and begin using your application. The guide will also help
+you understand the functionalities provided by the application. The following sections are included
+in this guide:
+
+		1. Environment requirements.
+		2. Installing and launching the application.
+		3. Using the application.
+			3.1. Search for contractors
+			3.2. Book contractors to a given customer
+			3.3. Cancel bookings
+	
+1. Environment requirements.
+
+The application was build with jdk version 1.7.0 and runs with java version 1.7.0. These or later 
+versions will be required to run the application. If you wish to re-build the application on your
+environment, follow section 2 on how to extract the application jar. Navigate to the 
+suncertify/code directory and run the following commands in a command prompt:
+
+		ant clean
+		ant dist
+		ant javadoc
+
+	
+2. Installing and Launching the application.
+
+To install the application, download the suncertify.jar file. Place it in an appropriate directory
+and and open a command prompt in the same directory. To extract the contents, run the following command
+in the command prompt:
+		
+		jar -xvf suncertify.jar
+
+A directory named suncertify will be created containing all the files for the application.
+The directory contains among other files an executable jar named runme.jar. This is the application's
+jar file.
+
+The application can launch as a standalone application or as a client server application. To launch
+in standalone mode run the following command in the directory containing the runme.jar file:
+	
+		java -jar runme.jar alone
+
+A GUI will promt you to accept the current settings read from the properties file or to enter new
+settings. Proceed accordingly and the application will launch in standalone mode.
+
+The application can also be launched as a client-server system. You need to launch the server in the
+server machine and the client on the client machine. To launch the server in the server machine, open
+a command prompt in the suncertify directory and run the following command:
+
+		java -jar runme.jar server
+	
+A GUI will prompt you to accept the current port number for the server to listen on and the path to
+the database directory or to enter new settings. After you confirm settings the GUI will close and
+the server will be launched on the command line.
+
+On the client machine (or on a separate command prompt on the same machine), navigate to the 
+suncertify directory and launch a commmand prompt. Run the following command:
+
+		java -jar runme.jar
+		
+Provide no command line options. A GUI will prompt you to accept current location of the server and
+port number the server is listening to. If these are correct i.e. the server is on that location,
+click yes to launch the client or otherwise, click no to enter new settings. These settings will
+be persisted in the properties file and future launches will use then. The client and the GUI will
+then launch.
+
+	
+3. Using The Application.
+
+Once you have confirmed database settings, the application launches the main window. The application provides
+three(3) use cases. They include searching for contractors, booking contractors to a customer and 
+cancellation of bookings.
+
+3.1. Searching for Contrators.
+The search functionality allows you to fetch all records or records satisfying a name and/or location criteria.
+Enter name and/or location of the contractor in the left side panel and click on the Get Records button.
+All records starting with the string entered in the respective fields will be displayed on the results table.
+To get all records click Get All Records button or leave the criteria fields blank and click Get Records button.
+
+3.2. Booking contractors to a customer.
+To make bookings, select records to be booked by checking their checkboxes at the last field of the displayed
+records on the table. You can select as many records as required but do not select records that are already 
+booked to another customer i.e. records with a value on the owner field. Click the Book Contractors button.
+If you had included records which are already booked in your selection you will be prompted to deselect them
+before proceeding. You will be prompted to enter the 8-digit customer number. Enter the number and 
+click ok. You will be prompted to confirm the customer number. Click yes and the records will be updated 
+accordingly.
+
+3.3. Cancellation of bookings.
+The application enables you to cancel bookings to records previously booked. Select the booked records and click
+cancel booking button. You will be prompted to confirm the cancellation and if you click yes the records will be
+updated accordingly.

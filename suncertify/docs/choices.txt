@@ -1,0 +1,58 @@
+
+This document will explain the design choises made on the main architecture, data access modules, networking and 
+the GUI. It will also explain many problems and uncertainties perceived and the decisions made. Sections 
+of the document include:
+
+	1. General Architectural design of the application.
+	2. Design of the Data Access Module.
+	3. Design of the Networking module.
+	4. Design of the Graphical User Interface (GUI).
+
+1. General Architectural Design of the Application.
+
+The application uses the commonly used Model - View - Controller architecture. Two major choises had to be made
+on the implementation of the Controller and the Model. The controller had two implementations, one to handle
+events on main view and the other to handle events on the settings gui. The model had two implementations, one
+to handle access to local database and the other to handle access to remote database via a network client.
+
+2. Design of the Data Access Module.
+
+The data access object is an implementation of the DBAccess interface provided with the assignment. One major
+implementation choise was to use RandomAccessFile class for most of the file I/O to facilitate easy seeking in 
+the file and flexible read and write. Another implementation issue was locking of records. The problem that I
+sought to solve was that locking one record should not prevent locking of another record in the database file.
+I therefore added a mapping of record number to a lock object. That way each record had its own lock object and 
+multiple records can be locked at the same time by different threads.
+
+One uncertainty was perceived when implementing the data access module. The requirements did not mention whether
+it was required to validate the database file but it provided a magic cookie at the begining of the file with 
+value 514. A choice was made to use this as the valid magic cookie value and to reject any database file with
+different magic cookie value.
+
+3. Design of the Networking module.
+
+The networking module is a simple Client - Server system with ability to handle multiple concurrent clients on
+the server. One design choise was to use a central ServerThreadPoolManager on the server code. This entity provides
+an independent thread for each client connection with the ability to reuse idle threads. 
+
+One implementation problem perceived was how to allow multiple entities on the server to service a socket 
+connection by using its I/O streams without terminating the connection. This was noticed when the data model
+needed to send notifications to all connections when updates were made to database records. At this point an entity
+above it i.e. the DatabaseServer had already created I/O streams on the socket and creating more I/O streams
+on the same socket caused it to terminate. A choice was made to create these I/O streams only in the 
+ThreadPoolManager and to pass them to the required entities.
+
+4. Design of the Graphical User Interface (GUI).
+
+The GUI is split into two distinct guis, the main gui and the database settings GUI. The settings gui is simple and
+allows the user to use current settings or to specify new settings. A problem was perceived when designing the 
+settings gui and that was how to specify database file when in client-server mode. A choice was made to specify the
+database file when launching the server. The client needs only to specify the IP of the server and the port on
+which to connect. This helped to simulate concurrent access to a central database file by multiple clients.
+
+The main Gui is also a simple extensible gui using tabbed panes. A choise was made to allow a user to make multiple
+booking for a single customer by selecting multiple records and specifying the customer number. All selected 
+records would then be updated with the given customer number. An additional utility was added to allow the user
+to cancel bookings.
+	
+	
