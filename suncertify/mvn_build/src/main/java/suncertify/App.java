@@ -15,7 +15,7 @@ import java.awt.event.WindowEvent;
  * This is the main class for the application. It provides
  * methods to get user settings, initialize database parameters from
  * properties file and to launch the application whether in single mode or client only mode
- * or to launch the network server mode.
+ * or to launch the network server mode. 
  * 
  * @author Moses L. Jilugu
  * @version Dec 11, 2012
