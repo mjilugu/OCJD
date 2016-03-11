@@ -31,7 +31,6 @@ public class AppController extends HttpServlet {
 		// TODO Auto-generated method stub
 		PrintWriter writer = response.getWriter();
 		writer.println("Boggit-scaper-web");
-		
 	}
 
 	/**
@@ -39,6 +38,9 @@ public class AppController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String brokerName = request.getParameter("brokerName");
+		PrintWriter writer = response.getWriter();
+		writer.println("You Requested Brokers with names containing string " + brokerName);
 	}
 
 }
