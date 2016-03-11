@@ -10,14 +10,14 @@
 		<location>/404.xhtml</location>
 	</error-page> -->
 	
-    <servlet>
-        <servlet-name>Faces Servlet</servlet-name>
-        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+    <!--servlet>
+        <servlet-name>AppController</servlet-name>
+        <servlet-class>suncertify.AppController</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>*.xhtml</url-pattern>
-    </servlet-mapping>
+        <servlet-name>AppController</servlet-name>
+        <url-pattern>/AppController</url-pattern>
+    </servlet-mapping-->
 </web-app>
